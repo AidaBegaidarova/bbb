@@ -3,7 +3,7 @@ import socket, os
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind(("127.0.0.1", 2222))
 s.listen(10)
-os.fork()
+pid=os.fork()
 if pid==0:
     while True:
         conn, addr = s.accept()
