@@ -1,4 +1,4 @@
-#Несколько потоков обработки сокета
+#Несколько потоков
 import socket, os
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
