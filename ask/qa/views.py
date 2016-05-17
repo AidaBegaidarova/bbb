@@ -1,11 +1,12 @@
 from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_GET, require_POST
 
-# Create your views here.
+from forms import AnswerForm, AskForm
+from models import Question, Answer
 
-from django.http import HttpResponse 
+
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
   
@@ -20,6 +21,7 @@ def home(request):
         'page': page,
     })
 
+
 @require_GET
 def popular(request):
     questions = Question.objects.order_by('-rating')
@@ -30,6 +32,7 @@ def popular(request):
         'paginator': paginator,
         'page': page,
     })
+
 
 @require_GET
 def question(request, id):
@@ -42,7 +45,31 @@ def question(request, id):
         'answers': answers,
         'form': answer_form
     })
-  
+
+
+@require_POST
+def answer(request):
+    form = AnswerForm(request.POST)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.author = request.user
+        answer.save()
+        return redirect(answer.question)
+
+
+def ask(request):
+    if request.method == "POST":
+        form = AskForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user
+            question.save()
+            return redirect(question)
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', {'form': form})
+
+
 def paginate(request, qs):
     try:
         limit = int(request.GET.get('limit', 10))

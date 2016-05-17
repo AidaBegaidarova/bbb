@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     url(r'^ask/', 'qa.views.ask', name='ask'),
     url(r'^popular/', 'qa.views.popular', name='popular'),
     url(r'^new', 'qa.views.test'),
-    url(r'^answer/$', 'qa.views.test'),
+    url(r'^answer/$', 'qa.views.answer', name='answer'),
 )
