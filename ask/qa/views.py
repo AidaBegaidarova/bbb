@@ -91,3 +91,5 @@ def paginate(request, qs):
         page = paginator.page(paginator.num_pages)
 
     return paginator, page
+
+
