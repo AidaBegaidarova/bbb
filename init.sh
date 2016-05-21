@@ -6,8 +6,8 @@ ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/test.conf
 #ln -sf /home/box/web/etc/gunicorn_ask.conf /etc/gunicorn.d/ask
 #/etc/init.d/gunicorn restart
 
-/etc/init.d/mysql start
-#mysql -u root -e "create database qa"
+/etc/init.d/mysql restart
+mysql -u root -e "create database qa"
 
 #/home/box/web/ask/manage.py syncdb
 
