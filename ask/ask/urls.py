@@ -1,9 +1,9 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'ask.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
@@ -17,4 +17,4 @@ urlpatterns = patterns('',
     url(r'^popular/', 'qa.views.popular', name='popular'),
     url(r'^new', 'qa.views.test'),
     url(r'^answer/$', 'qa.views.answer', name='answer'),
-)
+]
